@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>文件夹搜索和链接生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #fileLinks {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>文件夹搜索和链接生成器</h1>
+    <button onclick="refreshLinks()">刷新链接</button>
+    <div id="fileLinks"></div>
+
+    <script>
+        function refreshLinks() {
+            const fileLinksDiv = document.getElementById('fileLinks');
+            fileLinksDiv.innerHTML = ''; // 清空之前的链接
+
+            // 假设 `pages` 文件夹在当前路径下
+            const pagesPath = 'pages/';
+
+            fetch(pagesPath)
+                .then(response => response.text())
+                .then(data => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const links = doc.querySelectorAll('a');
+
+                    if (links.length > 0) {
+                        links.forEach(link => {
+                            const a = document.createElement('a');
+                            a.href = pagesPath + link.getAttribute('href');
+                            a.textContent = link.textContent;
+                            a.target = '_blank';
+                            a.style.display = 'block';
+                            fileLinksDiv.appendChild(a);
+                        });
+                    } else {
+                        fileLinksDiv.innerHTML = '没有找到文件。';
+                    }
+                })
+                .catch(error => {
+                    console.error('无法获取文件列表：', error);
+                    fileLinksDiv.innerHTML = '无法获取文件列表。';
+                });
+        }
+    </script>
+</body>
+</html>

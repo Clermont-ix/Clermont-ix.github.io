@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>文件搜索和链接生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #fileLinks {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>文件搜索和链接生成器</h1>
+    <button onclick="fetchFiles()">获取名为'js'的文件夹内容</button>
+    <div id="fileLinks"></div>
+
+    <script>
+        async function fetchFiles() {
+            const repo = '你的用户名/你的存储库名'; // 例如：octocat/Hello-World
+            const path = 'js'; // 文件夹路径
+            const url = `https://api.github.com/repos/${repo}/contents/${path}`;
+            
+            try {
+                const response = await fetch(url);
+                const files = await response.json();
+                const fileLinksDiv = document.getElementById('fileLinks');
+                fileLinksDiv.innerHTML = '';
+
+                files.forEach(file => {
+                    if (file.type === 'file') {
+                        const a = document.createElement('a');
+                        a.href = file.download_url;
+                        a.textContent = file.name;
+                        a.target = '_blank';
+                        a.style.display = 'block';
+                        fileLinksDiv.appendChild(a);
+                    }
+                });
+            } catch (error) {
+                console.error('获取文件列表失败:', error);
+            }
+        }
+    </script>
+</body>
+</html>

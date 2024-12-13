@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>文件搜索和链接生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #fileLinks {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>文件搜索和链接生成器</h1>
+    <input type="file" id="fileInput" webkitdirectory directory multiple>
+    <button onclick="generateLinks()">生成链接</button>
+    <button onclick="triggerFileSelect()">选择默认文件夹</button>
+    <div id="fileLinks"></div>
+
+    <script>
+        function generateLinks() {
+            const input = document.getElementById('fileInput');
+            const fileLinksDiv = document.getElementById('fileLinks');
+            fileLinksDiv.innerHTML = ''; // 清空之前的链接
+
+            if (input.files.length > 0) {
+                const fragment = document.createDocumentFragment();
+
+                Array.from(input.files).forEach(file => {
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(file);
+                    a.textContent = file.name;
+                    a.target = '_blank';
+                    a.style.display = 'block';
+                    fragment.appendChild(a);
+                });
+
+                fileLinksDiv.appendChild(fragment);
+            } else {
+                fileLinksDiv.innerHTML = '没有选择文件。';
+            }
+        }
+
+        function triggerFileSelect() {
+            const input = document.getElementById('fileInput');
+            input.click();
+        }
+    </script>
+</body>
+</html>
