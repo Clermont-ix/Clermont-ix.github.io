@@ -30,18 +30,31 @@
                 const fileLinksDiv = document.getElementById('fileLinks');
                 fileLinksDiv.innerHTML = '';
 
-                files.forEach(file => {
-                    if (file.type === 'file') {
+                for (const file of files) {
+                    if (file.type === 'file' && file.name.endsWith('.html')) {
+                        const title = await fetchTitle(file.download_url);
                         const a = document.createElement('a');
-                        a.href = file.download_url;
-                        a.textContent = file.name;
+                        a.href = `https://Clermont-ix.github.io/${path}/${file.name}`;
+                        a.textContent = title || file.name;
                         a.target = '_blank';
                         a.style.display = 'block';
                         fileLinksDiv.appendChild(a);
                     }
-                });
+                }
             } catch (error) {
-                console.error('Reson:', error);
+                console.error('Get file list error:', error);
+            }
+        }
+
+        async function fetchTitle(url) {
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const titleMatch = text.match(/<title>(.*?)<\/title>/i);
+                return titleMatch ? titleMatch[1] : null;
+            } catch (error) {
+                console.error('获取标题失败:', error);
+                return null;
             }
         }
     </script>

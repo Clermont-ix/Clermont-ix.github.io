@@ -1,25 +1,4 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>文件搜索和链接生成器</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        #fileLinks {
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>文件搜索和链接生成器</h1>
-    <button onclick="fetchFiles()">获取名为'js'的文件夹内容</button>
-    <div id="fileLinks"></div>
-
-    <script>
-        async function fetchFiles() {
+async function fetchFiles() {
             const repo = 'Clermont-ix/Clermont-ix.github.io'; // 例如：octocat/Hello-World
             const path = 'articles/pages'; // 文件夹路径
             const url = `https://api.github.com/repos/${repo}/contents/${path}`;
@@ -43,7 +22,4 @@
             } catch (error) {
                 console.error('Reson:', error);
             }
-        }
-    </script>
-</body>
-</html>
+}

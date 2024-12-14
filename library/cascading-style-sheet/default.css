@@ -43,3 +43,23 @@ body,html{
 	width: 100%;
 	overflow: overlay;
 }
+
+button{
+	border-style: solid;
+	border-radius: 5px;
+	padding: 5px 10px;
+	border-color: rgba(128,128,128,1.00);
+	background: rgba(232,232,232,1.00);
+}
+
+a{
+	color: royalblue;
+}
+
+#fileLinks a{
+/*	text-decoration: none;*/
+}
+
+#end{
+	text-align: center;
+}

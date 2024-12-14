@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<link href="/library/cascading-style-sheet/default.css" rel="stylesheet" type="text/css">
 	<script src="/library/java-script/default.js"></script>
-	<script src="/library/java-script/articles-search.js"></script>
+	<script src="/library/java-script/fetchFiles.js"></script>
 </head>
 
 <body>
@@ -24,10 +24,12 @@
 	</div>
 -->
 	<div id="body">
-		<input type="file" id="fileInput" value="pages/" style="display: flex" webkitdirectory directory multiple>
-		<button onclick="generateLinks()">生成链接</button>
+		<h1>Articles</h1>
+		<button onclick="fetchFiles()">Refresh list</button>
 		<div id="fileLinks"></div>
-		<div id="fileLink"></div>
+	</div>
+	<div id="end">
+		©Copyright Clermont-ix.
 	</div>
 </body>
 </html>
