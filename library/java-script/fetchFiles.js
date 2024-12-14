@@ -14,7 +14,7 @@ async function fetchFiles() {
 				const a = document.createElement('a');
 				a.href = `https://Clermont-ix.github.io/${path}/${file.name}`;
 				const title = await fetchTitle(a.href);
-				a.textContent = title || "file.name";
+				a.textContent = title || "No title.";
 				a.target = '_blank';
 				a.style.display = 'block';
 				fileLinksDiv.appendChild(a);
