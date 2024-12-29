@@ -36,6 +36,14 @@
 	justify-content: center;
 	align-items: center;
 }
+.fullscreen-pub{
+	height: 100vh;
+	width: calc(100%);
+	background-color: #f0f0f0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 body,html{
 	margin: 0;
 	padding: 0;
